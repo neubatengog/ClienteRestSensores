@@ -1,0 +1,16 @@
+<ion-view title="Detalle Nodo{{NodoId}}">
+  <ion-content>
+  	 <ion-list>
+      <ion-item ng-repeat="dato in datos" >
+          <a class="item item-icon-left" >
+           <i class="icon ion-podium"></i> 
+           
+          <h2>{{dato.name}}</h2> 
+          
+          <p> {{dato.value}}
+           fecha 
+           {{dato.time * 1000| date:'h:mm:ss a MMM d' }}</p></a>
+      </ion-item>
+     </ion-list>
+  </ion-content>
+</ion-view>

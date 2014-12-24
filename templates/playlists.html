@@ -1,0 +1,18 @@
+<ion-view title="Listado Nodos">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <!--<ion-list>
+      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+        {{playlist.title}}
+      </ion-item>
+    </ion-list>-->
+
+    <ion-list>
+      <ion-item ng-repeat="input in inputs" href="#/app/playlists/{{input.nodeid}}"  class="item item-icon-left item-icon-right">
+           <i class="icon ion-connection-bars"></i>Nodo{{input.nodeid}}<span class="badge badge-assertive">0</span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
