@@ -5,11 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var apiKey = "83e1d33c0c24b143beeb54dfd9c3d3a1"; 
-var servidor = 'http://10.0.0.181/emon/';
+var servidor;
+angular.module('ionic.utils', [])
 
-angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform) {
+angular.module('starter', ['ionic', 'starter.controllers' , 'ionic.utils', 'ngStorage'])
+
+.run(function($ionicPlatform, $localStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,28 +22,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+   
+    
+
   });
 })
 
-.factory('$localstorage', ['$window', function($window) {
-  return {
-    set: function(key, value) {
-      $window.localStorage[key] = value;
-    },
-    get: function(key, defaultValue) {
-      return $window.localStorage[key] || defaultValue;
-    },
-    setObject: function(key, value) {
-      $window.localStorage[key] = JSON.stringify(value);
-    },
-    getObject: function(key) {
-      return JSON.parse($window.localStorage[key] || '{}');
-    }
-  }
-}])
+
 
 
 .config(function($stateProvider, $urlRouterProvider) {
+ 
   $stateProvider
 
   .state('app', {
@@ -64,7 +55,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: "/browse",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/browse.html",
+        controller: 'guardar'
+
       }
     }
   })

@@ -1,7 +1,8 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngStorage'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
+  
+   // Form data for the login modal
   $scope.loginData = {};
 
   // Create the login modal that we will use later
@@ -33,7 +34,18 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope, $http) {
+.controller('guardar', function($scope, $localStorage){
+    $scope.save = function(val) {
+          $localStorage.servidor = val;
+    }
+ 
+    $scope.load = function() {
+          $scope.data = $localStorage.servidor;
+    }
+})
+
+.controller('PlaylistsCtrl', function($scope, $http ,  $localStorage) {
+  servidor = 'http://' + $localStorage.servidor + '/emon/';
   $scope.dire = servidor+'input/list.json&apikey='+apiKey;
   $http.get($scope.dire).
     success(function(data){
@@ -54,14 +66,16 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams, $http) {
+.controller('PlaylistCtrl', function($scope, $stateParams, $http, $localStorage ) {
     $scope.NodoId =$stateParams.listId;
+    servidor = 'http://' + $localStorage.servidor + '/emon/';
+    console.log(servidor);
     $scope.dire = servidor+'input/list.json&apikey='+apiKey;
     $http.get($scope.dire).
     success(function(data){
         $scope.datos = [];
         angular.forEach(data, function(value, index) {
-            console.log(value); 
+            //console.log(value); 
             if (value.nodeid == $scope.NodoId){   
 
                 $scope.datos.push(value);
